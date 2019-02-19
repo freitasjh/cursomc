@@ -15,29 +15,38 @@ import com.joao.cursomc.domain.Categoria;
 import com.joao.cursomc.services.CategoriaService;
 
 @RestController
-@RequestMapping(value="/categorias")
+@RequestMapping(value = "/categorias")
 public class CategoriaResource {
-	
+
 	@Autowired
 	private CategoriaService service;
-	
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
+
+		Categoria obj = service.find(id);
 		
-		Categoria obj = service.buscar(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	
-	@RequestMapping(method=RequestMethod.POST)
+
+	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@RequestBody Categoria obj) {
-		
+
 		obj = service.insert(obj);
-		
-		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/{id}").buildAndExpand(obj.getId()).toUri();
-		
+
+		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/{id}").buildAndExpand(obj.getId())
+				.toUri();
+
 		return ResponseEntity.created(uri).build();
-		
-		
+
 	}
 	
+	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id) {
+		obj.setId(id);
+		obj = service.update(obj);
+		
+		return ResponseEntity.noContent().build();
+		
+	}
 }
