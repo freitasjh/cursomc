@@ -2,9 +2,11 @@ package com.joao.cursomc.domain;
 
 import javax.persistence.Entity;
 
-import com.joao.cursomc.domain.enuns.EstadoPagemento;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.joao.cursomc.domain.enuns.EstadoPagamento;
 
 @Entity
+@JsonTypeName("pagamentoComCartao")
 public class PagamentoComCartao extends Pagamento {
 
 	/**
@@ -17,7 +19,7 @@ public class PagamentoComCartao extends Pagamento {
 		// TODO Auto-generated constructor stub
 	}
 
-	public PagamentoComCartao(Integer id, EstadoPagemento estado, Pedido pedido, Integer numeroDeParcelas) {
+	public PagamentoComCartao(Integer id, EstadoPagamento estado, Pedido pedido, Integer numeroDeParcelas) {
 		super(id, estado, pedido);
 		this.numeroDeParcelas = numeroDeParcelas;
 

@@ -5,10 +5,12 @@ import java.util.Date;
 import javax.persistence.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.joao.cursomc.domain.enuns.EstadoPagemento;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.joao.cursomc.domain.enuns.EstadoPagamento;
 
 
 @Entity
+@JsonTypeName("pagamentoComBoleto")
 public class PagamentoComBoleto extends Pagamento {
 
 	/**
@@ -25,7 +27,7 @@ public class PagamentoComBoleto extends Pagamento {
 		// TODO Auto-generated constructor stub
 	}
 
-	public PagamentoComBoleto(Integer id, EstadoPagemento estado, Pedido pedido, Date dataVencimento,
+	public PagamentoComBoleto(Integer id, EstadoPagamento estado, Pedido pedido, Date dataVencimento,
 			Date dataPagemento) {
 		super(id, estado, pedido);
 		this.dataPagamento = dataPagemento;
